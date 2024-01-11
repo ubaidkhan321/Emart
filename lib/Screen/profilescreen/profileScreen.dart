@@ -23,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
         title: "Setting".text.make(),
         actions: [
           IconButton(onPressed: (){
-            Get.to(()=> const EditProfile());
+            Get.to(()=>  EditProfile(username: controller.snapshot['name'],));
           }, icon: const Icon(Icons.edit)),
           TextButton(onPressed: (){}, child: "Logout".text.make())
         ],
@@ -50,11 +50,8 @@ class ProfileScreen extends StatelessWidget {
             children: [
               
               ListTile(
-                leading: const CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage(icProduct),
-          
-                ),
+                leading: controller.snapshot['imageurl'] == '' ? Image.asset(imgproduct,width: 100,fit: BoxFit.cover,).box.clip(Clip.antiAlias).roundedFull.make() :
+                Image.network(controller.snapshot['imageurl'],width: 100,fit: BoxFit.cover,).box.clip(Clip.antiAlias).roundedFull.make(),
                 title: "${controller.snapshot['name']}".text.white.make(),
                 subtitle: "${controller.snapshot['email']}".text.white.make(),
               ),

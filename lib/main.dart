@@ -29,6 +29,9 @@ class _MyAppState extends State<MyApp> {
       else{
         loginuser = true;
       }
+       setState(() {
+         
+       });
 
 
     });

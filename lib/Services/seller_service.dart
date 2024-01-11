@@ -9,4 +9,8 @@ static getprofile({uid}){
 }
 
 
+static getallmessage({uid}){
+  return firestore.collection(chatcollection).where('to_id',isEqualTo: uid).snapshots();
+}
+
 }

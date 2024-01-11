@@ -1,9 +1,13 @@
 import 'package:e_seller_app/const/const.dart';
 
-Widget customtextfield({labelname,hintname, icon,isdense = false}){
+Widget customtextfield({labelname,hintname, icon,isdense = false,controller}){
   return Column(
     children: [
       TextFormField(
+        style: const TextStyle(
+          color: white,
+        ),
+        controller: controller ,
         maxLines: isdense ? 4 : 1,
         decoration: InputDecoration(
           hintText: "$hintname",
