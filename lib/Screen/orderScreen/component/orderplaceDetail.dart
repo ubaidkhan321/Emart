@@ -24,8 +24,8 @@ Widget orderplace({t1,t2,d1,d2}){
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     "$t1".text.color(purpleColor).make(),
-                    "$d1".text.color(fontGrey).make()
+                     "$t2".text.color(purpleColor).make(),
+                    "$d2".text.color(fontGrey).make()
                            
                            
                   ],),

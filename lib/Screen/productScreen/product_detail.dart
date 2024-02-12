@@ -2,13 +2,16 @@ import 'package:e_seller_app/const/const.dart';
 import 'package:get/get.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+
+ final dynamic data;
+  const ProductDetail({super.key,
+  this.data});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Product title".text.make(),
+        title: "${data["p_name"]}".text.make(),
         leading:
             IconButton(onPressed: () {
               Get.back();
@@ -25,10 +28,10 @@ class ProductDetail extends StatelessWidget {
                   aspectRatio: 16 / 9,
                   viewportFraction: 1.0,
                   autoPlay: true,
-                  itemCount: 3,
+                  itemCount: data["p_img"].length,
                   itemBuilder: (context, index) {
-                    return Image.asset(
-                      imgproduct,
+                    return Image.network(
+                      data["p_img"][index],
                       width: double.infinity,
                       fit: BoxFit.cover,
                     );
@@ -36,20 +39,23 @@ class ProductDetail extends StatelessWidget {
               10.heightBox,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  "Product Title".text.fontWeight(FontWeight.bold).make(),
+                  "${data["p_name"]}".text.fontWeight(FontWeight.bold).make(),
                   VxRating(
                       size: 25,
                       maxRating: 5,
                       normalColor: fontGrey,
-                      value: 3.0,
+                      value: double.parse(data['p_rating']),
                       isSelectable: false,
                       selectionColor: Colors.yellow,
                       count: 5,
                       onRatingUpdate: (value) {}),
-                  "\$300.0".text.color(red).size(18).make(),
+                  "${data["p_price"]}".numCurrency.text.color(red).fontWeight(FontWeight.bold).size(18).make(),
                   20.heightBox,
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -58,12 +64,14 @@ class ProductDetail extends StatelessWidget {
                             child: "Color".text.color(darkGrey).make(),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                                3,
+                                data['p_color'].length,
                                 (index) => VxBox()
                                     .size(40, 40)
                                     .roundedFull
-                                    .color(Vx.randomPrimaryColor)
+                                    .color(Color(data['p_color'][index]))
                                     .margin(const EdgeInsets.symmetric(
                                         horizontal: 6))
                                     .make()
@@ -77,7 +85,7 @@ class ProductDetail extends StatelessWidget {
                             width: 100,
                             child: "Quantity".text.color(darkGrey).make(),
                           ),
-                          "20 Item".text.color(fontGrey).make(),
+                          "${data['p_qunatity']} item".text.color(fontGrey).make(),
                         ],
                       )
                     ],
